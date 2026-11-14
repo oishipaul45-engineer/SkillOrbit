@@ -1,300 +1,354 @@
-# 🚀 SkillOrbit
+# ✦ SkillOrbit
 
-<p align="center">
-  <img src="assets/hero-learning.png" alt="SkillOrbit" width="850">
-</p>
+### Skills in Motion
 
-<h1 align="center">SkillOrbit</h1>
+> **Learn. Share. Connect. Grow together.**
 
-<p align="center">
-  <strong>Skills in Motion — Learn. Share. Connect.</strong>
-</p>
+SkillOrbit is a peer-to-peer skill learning platform designed to help people **discover skills, find compatible learners and teachers, exchange knowledge, and build meaningful learning connections** through one unified digital experience.
 
-<p align="center">
-  A peer-to-peer skill exchange platform that transforms individual knowledge into meaningful learning connections.
-</p>
-
-<p align="center">
-
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
-
-</p>
-
-<p align="center">
-
-<a href="https://github.com/oishipaul45-engineer/SkillOrbit">
-  <img src="https://img.shields.io/github/stars/oishipaul45-engineer/SkillOrbit?style=flat-square" alt="GitHub Stars">
-</a>
-<a href="https://github.com/oishipaul45-engineer/SkillOrbit">
-  <img src="https://img.shields.io/github/forks/oishipaul45-engineer/SkillOrbit?style=flat-square" alt="GitHub Forks">
-</a>
-<a href="https://github.com/oishipaul45-engineer/SkillOrbit">
-  <img src="https://img.shields.io/github/last-commit/oishipaul45-engineer/SkillOrbit?style=flat-square" alt="Last Commit">
-</a>
-
-</p>
+Built with a modern **HTML, CSS, JavaScript, and Firebase architecture**, SkillOrbit transforms skill discovery from a simple profile-based system into an interactive learning ecosystem.
 
 ---
 
-## 🌌 The Idea Behind SkillOrbit
+## ✨ Why SkillOrbit?
 
-What if learning wasn't limited to classrooms, courses, or one-way teaching?
+People often want to learn something new but don't know **who can teach them**.
 
-What if **every person could be both a learner and a teacher?**
+At the same time, many people already have valuable skills but don't have an easy way to **share them with others**.
 
-That's the idea behind **SkillOrbit**.
+**SkillOrbit connects both sides.**
 
-SkillOrbit is a peer-to-peer learning platform where people can:
-
-**Teach what they know → Discover people → Find skill matches → Request to learn → Connect → Grow together**
-
-Instead of treating learning as a one-directional relationship, SkillOrbit creates an ecosystem where knowledge continuously moves between people.
-
-> **Everyone knows something.  
-> Everyone can learn something.**
+Users can showcase what they can teach, specify what they want to learn, discover compatible people, send learning requests, and turn successful connections into active learning sessions.
 
 ---
 
-## ✨ What Makes SkillOrbit Different?
+## 🚀 Features
 
-Traditional learning platforms usually look like:
+### 👤 User Authentication
 
-```text
-Teacher
+Create and access a personalized SkillOrbit account using Firebase Authentication.
 
-SkillOrbit is designed around:
+Users can securely:
 
-              ┌──────────────┐
-              │    LEARN     │
-              └──────┬───────┘
-                     │
-                     ▼
-              ┌──────────────┐
-              │   CONNECT    │
-              └──────┬───────┘
-                     │
-                     ▼
-              ┌──────────────┐
-              │    SHARE     │
-              └──────┬───────┘
-                     │
-                     ▼
-              ┌──────────────┐
-              │     GROW     │
-              └──────┬───────┘
-                     │
-                     └──────────────► LEARN
+- Create an account
+- Log in
+- Stay authenticated
+- Access their personal dashboard
+- Log out
 
-  A person can be a teacher today, a learner tomorrow, and both at the same time.
+---
 
-That is the core philosophy of SkillOrbit.
-🎯 Core Features
-🔐 Authentication
-Secure user authentication powered by Firebase.
+### 🛠️ My Skills
 
-Users can create an account and access their personalized SkillOrbit experience.
-👤 Personal Profiles
-Every user gets a personal profile containing:
-- Name
-- Email
-- Teaching skills
-- Learning goals
-- Skill activity
-Profiles become the foundation of the matching system.
-🛠️ Skill Management
-Users can define two types of skills:
-🟢 Skills I Can Teach
-Things the user already knows and can share with others.
-🔵 Skills I Want to Learn
-Things the user wants to develop.
+Manage the skills that define your learning profile.
 
-These two categories power the SkillOrbit matching system.
-🔎 Discover People
-The Discover section helps users find people based on their skills.
+Users can add skills under two categories:
 
-Users can explore:
-- Other learners
-- Potential teachers
-- Compatible skills
-- Match percentages
-- Learning opportunities
-The goal isn't simply to find users.
+**Skills I Can Teach**
 
-The goal is to find the right people to learn with.
-🎯 Smart Skill Matching
-SkillOrbit compares a user's learning interests with the teaching skills of other users.
+Skills the user already knows and can share with others.
+
+**Skills I Want to Learn**
+
+Skills the user wants to develop.
+
+This creates the foundation for SkillOrbit's matching system.
+
+---
+
+### 🔎 Discover People
+
+Explore other SkillOrbit users based on their skills and learning interests.
+
+The Discover experience helps users identify people who may be able to:
+
+- Teach something they want to learn
+- Learn something they can teach
+- Become a potential learning connection
+
+The goal is simple:
+
+> **Don't just discover people. Discover the right people to learn with.**
+
+---
+
+### 🎯 Skill Matching
+
+SkillOrbit compares users' teaching and learning skills to identify compatible connections.
 
 For example:
-USER A
-────────────────────
+
+```text
+User A
 Can Teach:
-• JavaScript
-• UI Design
+JavaScript
+
+User B
+Can Teach:
+Python
 
 Wants to Learn:
-• Python
-• Machine Learning
+JavaScript
 
+SkillOrbit can identify the relationship:
 
-USER B
-────────────────────
-Can Teach:
-• Python
-• Machine Learning
+User A
+   │
+   │ wants to learn Python
+   ▼
+User B
+   │
+   │ can teach Python
+   ▼
+MATCH
 
-Wants to Learn:
-• JavaScript
+This creates opportunities for meaningful peer-to-peer learning.
 
-The result:
-USER A  ─────────►  USER B
-Learn Python
-
-USER B  ─────────►  USER A
-Learn JavaScript
-
-This creates the possibility of a two-way knowledge exchange.
-🤝 From Match to Learning
-SkillOrbit doesn't stop at showing a match.
-
-It creates an actual learning flow.
-        DISCOVER
-           │
-           ▼
-       FIND MATCH
-           │
-           ▼
-      CHOOSE SKILL
-           │
-           ▼
-   REQUEST TO LEARN
-           │
-           ▼
-   TEACHER RECEIVES
-       REQUEST
-           │
-      ┌────┴────┐
-      ▼         ▼
-   ACCEPT     REJECT
-      │
-      ▼
-LEARNING SESSION
-
-When a teacher accepts a request, the connection becomes an active learning session.
-
-This turns a simple profile match into a real interaction.
 📩 Learning Requests
-When a user finds someone who can teach a skill they want to learn, they can send a specific learning request.
+Finding a match is only the beginning.
 
-Each request contains information such as:
+When a user finds someone who can teach a skill they want to learn, they can send a Request to Learn.
+
+Each request contains:
 - Learner
 - Teacher
 - Skill
 - Request status
 - Creation time
 - Update time
-Request states include:
-PENDING
-   │
-   ├──────────────► REJECTED
-   │
-   ▼
-ACCEPTED
-   │
-   ▼
-ACTIVE SESSION
+The request can then be:
 
-📚 Learning Sessions
-Accepted learning requests become active sessions.
+Accepted or Rejected by the teacher.
 
-Users can view their ongoing learning connections through the Sessions section.
+🤝 Learning Sessions
+Once a teacher accepts a learning request, SkillOrbit creates an active learning session.
 
-This creates a complete journey:
-Discovery → Match → Request → Acceptance → Session → Learning
+The complete journey becomes:
 
-🖥️ Dashboard
-The SkillOrbit dashboard provides a centralized view of the user's activity.
-Dashboard includes:
-Section	Purpose
-🧠 Skills Shared	Skills the user can teach
-📚 Skills Learning	Skills the user wants to learn
-🎯 Matches	Compatible skill connections
-🤝 Sessions	Active learning connections
-🛠️ My Skills	Manage personal skills
-🔎 Discover	Explore other users
-⚡ Quick Actions	Fast access to important features
+Discover
+   ↓
+Match
+   ↓
+Request
+   ↓
+Accept
+   ↓
+Session
+   ↓
+Learn
+
+This turns a simple skill match into an actual learning connection.
+
+📊 Personal Dashboard
+The SkillOrbit dashboard provides a centralized overview of a user's activity.
+
+It includes:
+- Skills Shared
+- Skills Learning
+- Matches
+- Sessions
+- My Skills
+- Discover People
+- Quick Actions
+Everything important stays accessible from one place.
 
 
-Everything is organized into one learning workspace.
+🎨 Modern Interface
+SkillOrbit uses a dark, futuristic interface designed around a focused learning experience.
+
+The interface includes:
+- Dark visual system
+- Neon green accent language
+- Modern dashboard layout
+- Sidebar navigation
+- Interactive cards
+- Skill-focused sections
+- Modal interactions
+- Responsive layouts
+- Clean typography
+- Smooth user interactions
+The interface is designed to feel like a modern digital learning workspace, rather than a traditional student portal.
+
+🧠 Design Philosophy
+SkillOrbit was designed around one simple idea:
+Everyone knows something. Everyone can learn something.
+
+Instead of treating learning as a one-way process, SkillOrbit creates a continuous cycle:
+
+SHARE
+   ↓
+CONNECT
+   ↓
+LEARN
+   ↓
+GROW
+   ↓
+SHARE
+
+A person can be a teacher and learner at the same time.
+
+This creates a more collaborative model of learning where knowledge moves between people.
+
+🔄 How SkillOrbit Works
+The complete SkillOrbit experience can be represented as:
+
+             CREATE ACCOUNT
+                    ↓
+              BUILD PROFILE
+                    ↓
+                ADD SKILLS
+                    ↓
+          ┌─────────┴─────────┐
+          ↓                   ↓
+     CAN TEACH          WANT TO LEARN
+          │                   │
+          └─────────┬─────────┘
+                    ↓
+             DISCOVER PEOPLE
+                    ↓
+              FIND MATCHES
+                    ↓
+            REQUEST TO LEARN
+                    ↓
+             TEACHER DECIDES
+                    ↓
+              ┌─────┴─────┐
+              ↓           ↓
+           ACCEPT       REJECT
+              ↓
+        LEARNING SESSION
+              ↓
+             GROW
+
+
+             🏗️ System Architecture
+SkillOrbit follows a simple client-cloud architecture.
+
+
+┌─────────────────────────────────────┐
+│           SKILLORBIT UI             │
+│                                     │
+│        HTML + CSS + JavaScript      │
+└──────────────────┬──────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────┐
+│       FIREBASE AUTHENTICATION       │
+│                                     │
+│          User Identity              │
+└──────────────────┬──────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────┐
+│          CLOUD FIRESTORE            │
+│                                     │
+│  Users                              │
+│  Skills                             │
+│  Learning Requests                  │
+│  Sessions                           │
+└─────────────────────────────────────┘
+
+
 🔥 Firebase Architecture
-SkillOrbit uses Firebase as its backend infrastructure.
-Firebase Authentication
-Handles:
+SkillOrbit uses Firebase as the backend infrastructure for authentication and cloud data storage.
+Authentication
+Firebase Authentication manages:
 - Account creation
 - Login
-- User identity
 - Authentication state
+- User identity
+- Logout
 Cloud Firestore
-Stores:
-- User profiles
-- Skills
-- Learning requests
-- Learning sessions
-Simplified structure:
-Firestore
+Firestore stores the application's user and learning data.
+
+The primary structure is:
+
+
+users/
 │
-├── users
-│   │
-│   └── {userId}
-│       ├── name
-│       ├── email
-│       │
-│       └── skills
-│           └── {skillId}
+└── {userId}/
+    │
+    ├── name
+    ├── email
+    ├── displayName
+    │
+    └── skills/
+        │
+        └── {skillId}
+            ├── name
+            ├── type
+            └── createdAt
+
+
+learningRequests/
 │
-├── learningRequests
-│   └── {requestId}
+└── {requestId}
+    ├── learnerUid
+    ├── learnerName
+    ├── learnerEmail
+    ├── teacherUid
+    ├── teacherName
+    ├── skillName
+    ├── status
+    ├── createdAt
+    └── updatedAt
+
+
+sessions/
 │
-└── sessions
-    └── {sessionId}
+└── {sessionId}
+    ├── learnerUid
+    ├── learnerName
+    ├── learnerEmail
+    ├── teacherUid
+    ├── teacherName
+    ├── skillName
+    ├── status
+    ├── createdAt
+    └── requestId
+
 
 🔐 Security
-SkillOrbit uses Firebase Authentication together with Firestore Security Rules.
+SkillOrbit uses Firebase Authentication together with Firestore Security Rules to control access to application data.
 
-Access to user-specific information is controlled using authenticated user identities.
+The access model follows:
 
-Learning requests and sessions are restricted to the people involved in those interactions.
-⚠️ Never upload Firebase service-account private keys, passwords, or other sensitive credentials to GitHub.
 
-🎨 User Experience
-SkillOrbit is designed with a modern dark interface and a futuristic learning-focused visual identity.
+User
+  ↓
+Firebase Authentication
+  ↓
+Authenticated UID
+  ↓
+Authorized Firestore Data
 
-The interface focuses on:
-- Clear navigation
-- Minimal friction
-- Fast interactions
-- Visual hierarchy
-- Responsive layouts
-- Skill-focused discovery
-- Simple learning workflows
-The experience is designed to make the journey from "I want to learn" to "I found someone" as simple as possible.
-🧩 Technology Stack
-Frontend
-- HTML5
-- CSS3
-- JavaScript
-Backend & Database
-- Firebase Authentication
-- Firebase Firestore
-Development
-- Visual Studio Code
-- Git
-- GitHub
-- Python HTTP Server
-📂 Project Structure
+
+User-specific profile and skill data is protected using the authenticated user's UID.
+
+Learning requests are restricted to the users involved in the request.
+
+Learning sessions are restricted to their participants.
+Firebase configuration values required by the client application should never be confused with private server credentials. Sensitive service-account keys and secrets should never be committed to the repository.
+
+
+
+🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| 🌐 HTML5 | Application structure |
+| 🎨 CSS3 | Styling and responsive design |
+| ⚡ JavaScript | Application logic and interactions |
+| 🔥 Firebase Authentication | User authentication |
+| ☁️ Cloud Firestore | Cloud database |
+| 🔀 Git | Version control |
+| 🐙 GitHub | Source code hosting |
+| 💻 Python HTTP Server | Local development |
+
+
+
+🏗️ Project Structure
+
 SkillOrbit/
 │
 ├── assets/
@@ -313,229 +367,227 @@ SkillOrbit/
 ├── index.html
 └── README.md
 
-🚀 Run SkillOrbit Locally
+
+⚙️ Getting Started
 1. Clone the repository
 git clone https://github.com/oishipaul45-engineer/SkillOrbit.git
 
-2. Open the project
+2. Navigate into the project
 cd SkillOrbit
 
-3. Start a local server
-If Python is installed:
+3. Start a local development server
+Using Python:
 python -m http.server 5500
 
-4. Open the application
+4. Open SkillOrbit
+Open:
 http://localhost:5500
 
-⚙️ Firebase Configuration
-To create your own instance of SkillOrbit:
-1. Create a Firebase project.
-2. Enable Firebase Authentication.
-3. Enable Cloud Firestore.
-4. Register a Web App.
-5. Add the Firebase configuration.
-6. Configure Firestore Security Rules.
-7. Run SkillOrbit using a local HTTP server.
-🗺️ Product Journey
-SkillOrbit is more than a collection of pages.
+The application should now be available locally.
 
-It follows a complete user journey:
-┌───────────────┐
-│ CREATE ACCOUNT│
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ BUILD PROFILE │
-└───────┬───────┘
-        │
-        ▼
-┌──────────────────────┐
-│ ADD TEACH / LEARN    │
-│       SKILLS         │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│   DISCOVER PEOPLE    │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│    FIND MATCHES      │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│ REQUEST TO LEARN     │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│ TEACHER ACCEPTS      │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│  LEARNING SESSION    │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│       GROW           │
-└──────────────────────┘
+🔥 Firebase Setup
+To run your own instance of SkillOrbit:
+1. Create a Firebase project
+Create a project through the Firebase Console.
+2. Enable Authentication
+Enable the authentication provider required by the application.
+3. Create a Firestore database
+Enable Cloud Firestore for the project.
+4. Register a Web App
+Add the SkillOrbit frontend as a Firebase Web App.
+5. Add Firebase Configuration
+Add the Firebase configuration to the application.
+6. Configure Firestore Rules
+Apply the required Firestore Security Rules for:
+- Users
+- Skills
+- Learning Requests
+- Sessions
+7. Run the application
+Start the local development server and open the application in your browser.
 
-🌱 Vision
-SkillOrbit is built around a simple belief:
-Knowledge should move.
 
-A developer can teach JavaScript and learn Python.
+🧪 Testing the Main Flow
+The core SkillOrbit workflow can be tested using multiple accounts.
+Account A
+Add:
+Can Teach:
+JavaScript
 
-A designer can teach UI design and learn marketing.
+Wants to Learn:
+Python
 
-A student can teach mathematics and learn video editing.
+Account B
+Add:
+Can Teach:
+Python
 
-A musician can teach guitar and learn programming.
+Wants to Learn:
+JavaScript
 
-The possibilities are endless because people themselves become the learning ecosystem.
-🌍 The Bigger Picture
-The internet has made information available everywhere.
+Then test:
+Account A
+   ↓
+Discover Account B
+   ↓
+Find Match
+   ↓
+Request to Learn
+   ↓
+Account B
+   ↓
+Accept Request
+   ↓
+Learning Session Created
 
-But information alone isn't enough.
+🎯 Project Goals
+SkillOrbit aims to become more than a simple skill directory.
 
-People still need:
-
-Someone to explain.
-Someone to practice with.
-Someone to ask questions.
-Someone to learn from.
-Someone to grow with.
-
-SkillOrbit aims to bridge that gap by turning individual skills into human connections.
-          KNOWLEDGE
-              │
-              ▼
-           PEOPLE
-              │
-              ▼
-          CONNECTION
-              │
-              ▼
-           LEARNING
-              │
-              ▼
-            GROWTH
-              │
-              └──────────────► KNOWLEDGE
-
-🔮 Future Scope
-SkillOrbit can grow into a much larger peer-learning ecosystem.
-Planned possibilities
+Future development can expand the platform with:
 - 📅 Session scheduling
 - 💬 Real-time messaging
-- 🎥 Video learning sessions
+- 🎥 Video learning
 - 🔔 Notifications
-- ⭐ Ratings and reviews
+- ⭐ User ratings
 - 🏆 Skill achievements
-- 🧠 AI-powered skill recommendations
-- 📊 Learning progress tracking
 - 🏅 Skill verification
+- 🧠 AI-powered recommendations
+- 📊 Learning progress tracking
 - 👥 Group learning
-- 📍 Location-based learning
+- 📚 Learning resources
 - 📱 Progressive Web App support
-- 🤖 Personalized learning paths
-The long-term vision is to make SkillOrbit a place where people don't just find courses.
+- 🔔 Smart learning reminders
 
-They find people who can help them grow.
-💡 Why This Project Matters
-SkillOrbit addresses a simple but powerful problem:
-People have skills, but often don't know who needs them.
-At the same time:
-People want to learn, but often don't know who can teach them.
-SkillOrbit connects those two sides.
-I CAN TEACH
-     │
-     │
-     ▼
-  SKILLORBIT
-     ▲
-     │
-     │
-I WANT TO LEARN
+🌟 What Makes SkillOrbit Different?
+Traditional learning platforms usually follow:
 
-And when those needs overlap:
-           ┌─────────────┐
-           │   MATCH     │
-           └──────┬──────┘
-                  │
-          ┌───────┴───────┐
-          ▼               ▼
-       TEACHER          LEARNER
-          │               │
+CONTENT
+   ↓
+STUDENT
+   ↓
+LEARNING
+
+SkillOrbit focuses on:
+PERSON
+   ↓
+SKILL
+   ↓
+DISCOVERY
+   ↓
+MATCH
+   ↓
+CONNECTION
+   ↓
+LEARNING
+   ↓
+GROWTH
+
+The platform doesn't simply ask:
+"What do you want to learn?"
+
+It also asks:
+"What can you teach someone else?"
+
+That creates the possibility of a continuously moving learning ecosystem.
+
+🧩 SkillOrbit Learning Loop
+The central concept behind SkillOrbit can be represented as:
+
+          ┌───────────────┐
+          │    SHARE      │
           └───────┬───────┘
-                  ▼
-              CONNECT
+                  ↓
+          ┌───────────────┐
+          │   DISCOVER    │
+          └───────┬───────┘
+                  ↓
+          ┌───────────────┐
+          │     MATCH     │
+          └───────┬───────┘
+                  ↓
+          ┌───────────────┐
+          │    CONNECT    │
+          └───────┬───────┘
+                  ↓
+          ┌───────────────┐
+          │     LEARN     │
+          └───────┬───────┘
+                  ↓
+          ┌───────────────┐
+          │     GROW      │
+          └───────┬───────┘
                   │
-                  ▼
-                GROW
+                  └──────────► SHARE
 
-🏗️ Project Goals
-SkillOrbit aims to:
-- Make peer learning accessible
-- Encourage knowledge sharing
-- Connect compatible learners
-- Make discovering people easier
-- Turn skills into meaningful connections
-- Encourage two-way learning
-- Create a community-driven learning environment
-- Reduce the gap between knowing and teaching
-- Help people learn directly from other people
-🧠 The SkillOrbit Philosophy
-You know something.
-        ↓
-Someone wants to learn it.
-        ↓
-You connect.
-        ↓
-They learn.
-        ↓
-You may learn something from them.
-        ↓
-Both grow.
 
-That's SkillOrbit.
+This loop represents the core philosophy of SkillOrbit:
+Skills move between people.
 
-Not just:
 
-Learn.
 
-Not just:
 
-Teach.
+🔮 Future Vision
+SkillOrbit can evolve into a complete peer-learning ecosystem connecting:
 
-But:
-Learn ↔ Share ↔ Connect ↔ Grow
+Learners + Teachers + Skills + Communities + Sessions
 
-👩‍💻 Built By
+The long-term vision is to create a platform where every user can:
+
+Learn something
+      ↓
+Meet someone
+      ↓
+Exchange knowledge
+      ↓
+Build a connection
+      ↓
+Develop a skill
+      ↓
+Teach someone else
+
+📌 Project Highlights
+SkillOrbit demonstrates practical implementation of:
+- 🌐 Frontend web development
+- 🎨 Responsive UI design
+- ⚡ JavaScript application logic
+- 🔐 Firebase Authentication
+- ☁️ Cloud Firestore
+- 🛡️ Firestore Security Rules
+- 👤 User profiles
+- 🛠️ CRUD operations
+- 🔎 User discovery
+- 🎯 Skill matching
+- 📩 Learning request workflows
+- 🤝 Session management
+- 🔄 Authentication-based data access
+- 🔀 Git version control
+- 🐙 GitHub repository management
+
+👨‍💻 Developer
 Oishi Paul
-Built with curiosity, creativity, experimentation, and a simple belief that learning becomes more powerful when people learn with people.
-⭐ Support the Project
-If you like the idea behind SkillOrbit, consider giving the repository a ⭐ on GitHub.
 
-It helps the project get discovered by more developers, learners, and builders.
+Engineering Student & Developer
 
-Repository:
+Passionate about building interactive digital experiences, exploring modern web technologies, and solving real-world problems through technology.
+
+GitHub
+https://github.com/oishipaul45-engineer
+
+📌 Repository
+SkillOrbit — GitHub
 https://github.com/oishipaul45-engineer/SkillOrbit
-<p align="center">🚀 SkillOrbit
-Skills in Motion.
-Learn something.
-Share something.
-Connect with someone.
-Grow together.
-</p><p align="center">
-  <strong>Built for people who believe knowledge is meant to move.</strong>
-</p>
-                   
-   │
-   ▼
-Student
+
+
+📄 License
+This project is currently intended for educational, experimental, portfolio, and project-development purposes.
+
+⭐ Support
+If you find SkillOrbit interesting, useful, or inspiring, consider giving the repository a ⭐ on GitHub.
+
+
+Your support helps the project grow.
+
+
+
+Wants to Learn:
+Python
