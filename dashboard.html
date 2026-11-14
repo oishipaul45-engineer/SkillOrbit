@@ -1,0 +1,4372 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SkillOrbit Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #07100b;
+            --bg-soft: #0b160f;
+            --card: #101c14;
+            --card-hover: #142219;
+            --border: rgba(168, 255, 62, 0.14);
+            --green: #a8ff3e;
+            --green-light: #baff5d;
+            --text: #f3f7ef;
+            --muted: #91a095;
+            --danger: #ff6262;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .dashboard {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            background: #09130d;
+            border-right: 1px solid var(--border);
+            padding: 28px 18px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 50;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px;
+            margin-bottom: 40px;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: var(--green);
+            color: #07100b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 17px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .nav-button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            padding: 13px 14px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background: rgba(168, 255, 62, 0.06);
+            color: var(--text);
+        }
+
+        .nav-button.active {
+            background: rgba(168, 255, 62, 0.1);
+            color: var(--green);
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+        .user-mini {
+            border-top: 1px solid var(--border);
+            padding-top: 18px;
+            margin-bottom: 12px;
+        }
+
+        .user-mini-name {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            word-break: break-word;
+        }
+
+        .user-mini-email {
+            font-size: 11px;
+            color: var(--muted);
+            word-break: break-word;
+        }
+
+        .logout-button {
+            width: 100%;
+            padding: 11px 14px;
+            border-radius: 11px;
+            border: 1px solid rgba(255, 98, 98, 0.2);
+            background: rgba(255, 98, 98, 0.05);
+            color: #ff8989;
+            font-size: 13px;
+        }
+
+        .logout-button:hover {
+            background: rgba(255, 98, 98, 0.1);
+        }
+
+        .main {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 35px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 35px;
+        }
+
+        .profile-button {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(168, 255, 62, 0.25);
+            background: rgba(168, 255, 62, 0.08);
+            color: var(--green);
+            font-weight: 800;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .welcome h1 {
+            font-size: clamp(30px, 4vw, 48px);
+            line-height: 1.05;
+            letter-spacing: -1.8px;
+            margin-bottom: 12px;
+        }
+
+        .welcome p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            padding: 22px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .stat-number {
+            color: var(--green);
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .dashboard-section {
+            margin-bottom: 35px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 21px;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .add-button {
+            border: none;
+            background: var(--green);
+            color: #07100b;
+            padding: 11px 17px;
+            border-radius: 11px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .add-button:hover {
+            background: var(--green-light);
+        }
+
+        .skills-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+            min-height: 120px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 11px;
+        }
+
+        .empty-state {
+            width: 100%;
+            text-align: center;
+            padding: 28px 15px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .empty-state strong {
+            display: block;
+            color: var(--text);
+            margin-bottom: 7px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 13px;
+            background: rgba(168, 255, 62, 0.05);
+            border: 1px solid rgba(168, 255, 62, 0.15);
+            border-radius: 12px;
+        }
+
+        .skill-name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .skill-type {
+            font-size: 10px;
+            color: var(--green);
+            padding: 4px 7px;
+            border-radius: 6px;
+            background: rgba(168, 255, 62, 0.08);
+        }
+
+        .delete-skill {
+            width: 23px;
+            height: 23px;
+            border-radius: 6px;
+            border: none;
+            background: rgba(255, 98, 98, 0.08);
+            color: #ff7777;
+            font-size: 13px;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .quick-card {
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 17px;
+            padding: 22px;
+            transition: 0.2s ease;
+        }
+
+        .quick-card:hover {
+            background: var(--card-hover);
+            transform: translateY(-2px);
+        }
+
+        .quick-card h3 {
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .quick-card p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .quick-action {
+            border: none;
+            background: transparent;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 0;
+        }
+
+        .discover-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 13px;
+        }
+
+        .discover-top {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 15px;
+        }
+
+        .discover-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(168, 255, 62, 0.1);
+            border: 1px solid rgba(168, 255, 62, 0.2);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .discover-name {
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .discover-email {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .match-badge {
+            margin-left: auto;
+            padding: 7px 10px;
+            border-radius: 9px;
+            background: rgba(168, 255, 62, 0.1);
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .match-badge.no-match {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+        }
+
+        .discover-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .discover-skill {
+            padding: 7px 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            font-size: 11px;
+        }
+
+        .discover-skill.teach {
+            color: var(--green);
+        }
+
+        .discover-skill.learn {
+            color: #b6c0ff;
+        }
+
+        .match-message {
+            padding: 11px 13px;
+            border-radius: 10px;
+            background: rgba(168, 255, 62, 0.05);
+            color: #c9d5ca;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .match-message strong {
+            color: var(--green);
+        }
+
+        .discover-empty {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 35px 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .discover-empty strong {
+            display: block;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--muted);
+            padding: 30px;
+            font-size: 13px;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: blur(7px);
+        }
+
+        .modal-card {
+            width: min(450px, calc(100% - 30px));
+            max-height: 85vh;
+            overflow-y: auto;
+            background: #0d1911;
+            border: 1px solid rgba(168, 255, 62, 0.2);
+            border-radius: 20px;
+            padding: 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 17px;
+            top: 15px;
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-size: 25px;
+        }
+
+        .modal-card h2 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .modal-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .skill-select {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 11px;
+            border: 1px solid rgba(168, 255, 62, 0.16);
+            background: #09130d;
+            color: var(--text);
+            outline: none;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .skill-select:focus {
+            border-color: rgba(168, 255, 62, 0.55);
+        }
+
+        .skill-select option {
+            background: #09130d;
+            color: white;
+        }
+
+        .save-button {
+            width: 100%;
+            border: none;
+            background: var(--green);
+            color: #07100b;
+            padding: 14px;
+            border-radius: 11px;
+            font-size: 13px;
+            font-weight: 800;
+            margin-top: 8px;
+        }
+
+        .save-button:hover {
+            background: var(--green-light);
+        }
+
+        .save-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* =====================================================
+           MATCH / SESSION FUNCTIONAL UI
+        ===================================================== */
+
+        .connection-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .connection-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .connection-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(168, 255, 62, 0.1);
+            border: 1px solid rgba(168, 255, 62, 0.2);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .connection-name {
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 3px;
+        }
+
+        .connection-email {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .connection-skill {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .connection-status {
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .connection-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .connection-button {
+            border: none;
+            border-radius: 9px;
+            padding: 9px 12px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .connection-button.primary {
+            background: var(--green);
+            color: #07100b;
+        }
+
+        .connection-button.secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+        }
+
+        .connection-button.danger {
+            background: rgba(255, 98, 98, 0.08);
+            color: #ff8989;
+        }
+
+        .connection-button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .modal-section-title {
+            color: var(--green);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            margin: 22px 0 12px;
+        }
+
+        .modal-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .modal-empty {
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            padding: 22px 10px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+                width: calc(100% - 210px);
+                padding: 25px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .dashboard {
+                display: block;
+            }
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                min-height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+                padding: 22px 16px;
+            }
+
+            .sidebar-bottom {
+                margin-top: 25px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .add-button {
+                width: 100%;
+            }
+
+            .discover-top {
+                align-items: flex-start;
+            }
+
+            .match-badge {
+                margin-left: 0;
+            }
+
+            .connection-actions {
+                flex-wrap: wrap;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-mark">
+                SO
+            </div>
+
+            <div class="logo-text">
+                SkillOrbit
+            </div>
+
+        </div>
+
+        <nav class="nav">
+
+            <button
+                class="nav-button active"
+                id="dashboardNav"
+            >
+                Dashboard
+            </button>
+
+            <button
+                class="nav-button"
+                id="skillsNav"
+            >
+                My Skills
+            </button>
+
+            <button
+                class="nav-button"
+                id="discoverNav"
+            >
+                Discover
+            </button>
+
+            <button
+                class="nav-button"
+                id="matchesNav"
+            >
+                Matches
+            </button>
+
+            <button
+                class="nav-button"
+                id="sessionsNav"
+            >
+                Sessions
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="user-mini">
+
+                <div
+                    class="user-mini-name"
+                    id="sidebarUserName"
+                >
+                    Loading...
+                </div>
+
+                <div
+                    class="user-mini-email"
+                    id="sidebarUserEmail"
+                >
+                    Loading...
+                </div>
+
+            </div>
+
+            <button
+                class="logout-button"
+                id="logoutBtn"
+            >
+                Log Out
+            </button>
+
+        </div>
+
+    </aside>
+
+    <main class="main" id="dashboardMain">
+
+        <div class="topbar">
+
+            <button
+                class="profile-button"
+                id="profileButton"
+            >
+                U
+            </button>
+
+        </div>
+
+        <section class="welcome" id="dashboardSection">
+
+            <div class="eyebrow">
+                Your learning space
+            </div>
+
+            <h1>
+                Welcome back,
+                <span id="welcomeName">
+                    there
+                </span>.
+            </h1>
+
+            <p>
+                Learn something new, share what you know,
+                and grow together.
+            </p>
+
+        </section>
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Skills Shared
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="teachCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Skills Learning
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="learnCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+            <div
+                class="stat-card"
+                id="matchesStatCard"
+            >
+
+                <div class="stat-label">
+                    Matches
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="matchCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+            <div
+                class="stat-card"
+                id="sessionsStatCard"
+            >
+
+                <div class="stat-label">
+                    Sessions
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="sessionCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </section>
+
+        <section
+            class="dashboard-section"
+            id="skillsSection"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        My Skills
+                    </h2>
+
+                    <p>
+                        Skills you can teach or want to learn.
+                    </p>
+
+                </div>
+
+                <button
+                    class="add-button"
+                    id="addSkillBtn"
+                >
+                    + Add Skill
+                </button>
+
+            </div>
+
+            <div class="skills-card">
+
+                <div
+                    class="skills-list"
+                    id="skillList"
+                >
+
+                    <div class="empty-state">
+
+                        <strong>
+                            No skills added yet
+                        </strong>
+
+                        Add your first skill to get started.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        Start using SkillOrbit.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="quick-grid">
+
+                <div class="quick-card">
+
+                    <h3>
+                        Add a Skill
+                    </h3>
+
+                    <p>
+                        Tell the community what you can teach
+                        or what you want to learn.
+                    </p>
+
+                    <button
+                        class="quick-action"
+                        id="quickAddSkill"
+                    >
+                        Add Skill →
+                    </button>
+
+                </div>
+
+                <div class="quick-card">
+
+                    <h3>
+                        Discover People
+                    </h3>
+
+                    <p>
+                        Find people with skills that match
+                        your learning goals.
+                    </p>
+
+                    <button
+                        class="quick-action"
+                        id="quickDiscover"
+                    >
+                        Discover →
+                    </button>
+
+                </div>
+
+                <div class="quick-card">
+
+                    <h3>
+                        Find Matches
+                    </h3>
+
+                    <p>
+                        SkillOrbit automatically identifies
+                        useful learning connections.
+                    </p>
+
+                    <button
+                        class="quick-action"
+                        id="quickMatches"
+                    >
+                        View Matches →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- DISCOVER
+             THIS SECTION IS KEPT AS YOUR EXISTING FUNCTIONAL VERSION -->
+
+        <section
+            class="dashboard-section"
+            id="discoverSection"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Discover People
+                    </h2>
+
+                    <p>
+                        Find learners and teachers who match your skills.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div id="discoverList">
+
+                <div class="loading">
+                    Loading SkillOrbit members...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================
+     ADD SKILL MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="skillModal"
+>
+
+    <div
+        class="modal-overlay"
+        id="skillModalOverlay"
+    ></div>
+
+    <div class="modal-card">
+
+        <button
+            class="close-modal"
+            id="closeSkillModal"
+        >
+            ×
+        </button>
+
+        <h2>
+            Add a Skill
+        </h2>
+
+        <p class="modal-description">
+            Tell SkillOrbit what you can teach
+            or what you want to learn.
+        </p>
+
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="skillName"
+            >
+                Choose a skill
+            </label>
+
+            <select
+                class="skill-select"
+                id="skillName"
+            >
+
+                <option value="">
+                    Select a skill
+                </option>
+
+                <optgroup label="Technology">
+
+                    <option value="Web Development">
+                        Web Development
+                    </option>
+
+                    <option value="JavaScript">
+                        JavaScript
+                    </option>
+
+                    <option value="Python">
+                        Python
+                    </option>
+
+                    <option value="Java">
+                        Java
+                    </option>
+
+                    <option value="C++">
+                        C++
+                    </option>
+
+                    <option value="Data Science">
+                        Data Science
+                    </option>
+
+                    <option value="Machine Learning">
+                        Machine Learning
+                    </option>
+
+                    <option value="Artificial Intelligence">
+                        Artificial Intelligence
+                    </option>
+
+                    <option value="Cybersecurity">
+                        Cybersecurity
+                    </option>
+
+                </optgroup>
+
+                <optgroup label="Design & Creative">
+
+                    <option value="UI/UX Design">
+                        UI/UX Design
+                    </option>
+
+                    <option value="Graphic Design">
+                        Graphic Design
+                    </option>
+
+                    <option value="Video Editing">
+                        Video Editing
+                    </option>
+
+                    <option value="Photography">
+                        Photography
+                    </option>
+
+                    <option value="Music">
+                        Music
+                    </option>
+
+                    <option value="Dance">
+                        Dance
+                    </option>
+
+                </optgroup>
+
+                <optgroup label="Business & Communication">
+
+                    <option value="Public Speaking">
+                        Public Speaking
+                    </option>
+
+                    <option value="Content Writing">
+                        Content Writing
+                    </option>
+
+                    <option value="Digital Marketing">
+                        Digital Marketing
+                    </option>
+
+                    <option value="Communication">
+                        Communication
+                    </option>
+
+                    <option value="Leadership">
+                        Leadership
+                    </option>
+
+                </optgroup>
+
+                <optgroup label="Lifestyle & Learning">
+
+                    <option value="Cooking">
+                        Cooking
+                    </option>
+
+                    <option value="Language Learning">
+                        Language Learning
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </optgroup>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label
+                class="form-label"
+                for="skillType"
+            >
+                Skill type
+            </label>
+
+            <select
+                class="skill-select"
+                id="skillType"
+            >
+
+                <option value="teach">
+                    I can teach this
+                </option>
+
+                <option value="learn">
+                    I want to learn this
+                </option>
+
+            </select>
+
+        </div>
+
+        <button
+            class="save-button"
+            id="saveSkillBtn"
+        >
+            Add Skill
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MATCHES MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="matchesModal"
+>
+
+    <div
+        class="modal-overlay"
+        id="matchesModalOverlay"
+    ></div>
+
+    <div class="modal-card">
+
+        <button
+            class="close-modal"
+            id="closeMatchesModal"
+        >
+            ×
+        </button>
+
+        <h2>
+            Matches
+        </h2>
+
+        <p class="modal-description">
+            Connect with people who can help you learn
+            or who want to learn from you.
+        </p>
+
+        <div
+            class="modal-section-title"
+            id="myMatchesTitle"
+        >
+            Your Matches
+        </div>
+
+        <div id="matchesList">
+
+            <div class="loading">
+                Loading matches...
+            </div>
+
+        </div>
+
+        <div
+            class="modal-section-title"
+            id="incomingTitle"
+        >
+            Incoming Requests
+        </div>
+
+        <div id="incomingRequestsList">
+
+            <div class="loading">
+                Loading requests...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SESSIONS MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="sessionsModal"
+>
+
+    <div
+        class="modal-overlay"
+        id="sessionsModalOverlay"
+    ></div>
+
+    <div class="modal-card">
+
+        <button
+            class="close-modal"
+            id="closeSessionsModal"
+        >
+            ×
+        </button>
+
+        <h2>
+            Sessions
+        </h2>
+
+        <p class="modal-description">
+            Your accepted learning connections appear here.
+        </p>
+
+        <div id="sessionsList">
+
+            <div class="loading">
+                Loading sessions...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+
+<script>
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAbp7pntWj2_BX2TjIqGHtcY_c-ueWZaUo",
+
+    authDomain:
+        "skillorbit-62d39.firebaseapp.com",
+
+    projectId:
+        "skillorbit-62d39",
+
+    storageBucket:
+        "skillorbit-62d39.firebasestorage.app",
+
+    messagingSenderId:
+        "610368029762",
+
+    appId:
+        "1:610368029762:web:41730499ab85975369d9db",
+
+    measurementId:
+        "G-JV1L0N8T1M"
+
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+
+const auth =
+    firebase.auth();
+
+const db =
+    firebase.firestore();
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const welcomeName =
+    document.getElementById("welcomeName");
+
+const sidebarUserName =
+    document.getElementById("sidebarUserName");
+
+const sidebarUserEmail =
+    document.getElementById("sidebarUserEmail");
+
+const profileButton =
+    document.getElementById("profileButton");
+
+const teachCount =
+    document.getElementById("teachCount");
+
+const learnCount =
+    document.getElementById("learnCount");
+
+const matchCount =
+    document.getElementById("matchCount");
+
+const sessionCount =
+    document.getElementById("sessionCount");
+
+const skillList =
+    document.getElementById("skillList");
+
+const discoverList =
+    document.getElementById("discoverList");
+
+const skillModal =
+    document.getElementById("skillModal");
+
+const skillModalOverlay =
+    document.getElementById("skillModalOverlay");
+
+const addSkillBtn =
+    document.getElementById("addSkillBtn");
+
+const quickAddSkill =
+    document.getElementById("quickAddSkill");
+
+const closeSkillModal =
+    document.getElementById("closeSkillModal");
+
+const saveSkillBtn =
+    document.getElementById("saveSkillBtn");
+
+const skillName =
+    document.getElementById("skillName");
+
+const skillType =
+    document.getElementById("skillType");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const skillsSection =
+    document.getElementById("skillsSection");
+
+const discoverSection =
+    document.getElementById("discoverSection");
+
+const skillsNav =
+    document.getElementById("skillsNav");
+
+const discoverNav =
+    document.getElementById("discoverNav");
+
+const dashboardNav =
+    document.getElementById("dashboardNav");
+
+const matchesNav =
+    document.getElementById("matchesNav");
+
+const sessionsNav =
+    document.getElementById("sessionsNav");
+
+const quickDiscover =
+    document.getElementById("quickDiscover");
+
+const quickMatches =
+    document.getElementById("quickMatches");
+
+const dashboardSection =
+    document.getElementById("dashboardSection");
+
+const matchesStatCard =
+    document.getElementById("matchesStatCard");
+
+const sessionsStatCard =
+    document.getElementById("sessionsStatCard");
+
+
+/* MATCHES */
+
+const matchesModal =
+    document.getElementById("matchesModal");
+
+const matchesModalOverlay =
+    document.getElementById("matchesModalOverlay");
+
+const closeMatchesModal =
+    document.getElementById("closeMatchesModal");
+
+const matchesList =
+    document.getElementById("matchesList");
+
+const incomingRequestsList =
+    document.getElementById("incomingRequestsList");
+
+
+/* SESSIONS */
+
+const sessionsModal =
+    document.getElementById("sessionsModal");
+
+const sessionsModalOverlay =
+    document.getElementById("sessionsModalOverlay");
+
+const closeSessionsModal =
+    document.getElementById("closeSessionsModal");
+
+const sessionsList =
+    document.getElementById("sessionsList");
+
+
+let currentUser = null;
+
+let mySkills = [];
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+auth.onAuthStateChanged(async (user) => {
+
+    if (!user) {
+
+        window.location.href =
+            "index.html";
+
+        return;
+
+    }
+
+
+    currentUser = user;
+
+
+    const email =
+        user.email || "";
+
+
+    let displayName =
+        user.displayName || "";
+
+
+    if (!displayName && email) {
+
+        displayName =
+            email.split("@")[0];
+
+    }
+
+
+    displayName =
+        displayName || "User";
+
+
+    welcomeName.textContent =
+        displayName;
+
+    sidebarUserName.textContent =
+        displayName;
+
+    sidebarUserEmail.textContent =
+        email;
+
+
+    profileButton.textContent =
+        displayName
+            .charAt(0)
+            .toUpperCase();
+
+
+    await loadSkills();
+
+    await loadDiscoverUsers();
+
+    await updateSessionCount();
+
+});
+
+
+/* =====================================================
+   LOAD MY SKILLS
+===================================================== */
+
+async function loadSkills() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    try {
+
+        const snapshot =
+            await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("skills")
+                .orderBy("createdAt", "desc")
+                .get();
+
+
+        skillList.innerHTML = "";
+
+        mySkills = [];
+
+
+        let teaches = 0;
+
+        let learns = 0;
+
+
+        if (snapshot.empty) {
+
+            skillList.innerHTML = `
+
+                <div class="empty-state">
+
+                    <strong>
+                        No skills added yet
+                    </strong>
+
+                    Add your first skill to get started.
+
+                </div>
+
+            `;
+
+        }
+
+
+        snapshot.forEach((doc) => {
+
+            const skill =
+                doc.data();
+
+
+            mySkills.push({
+
+                id:
+                    doc.id,
+
+                name:
+                    skill.name || "",
+
+                type:
+                    skill.type || ""
+
+            });
+
+
+            if (skill.type === "teach") {
+                teaches++;
+            }
+
+
+            if (skill.type === "learn") {
+                learns++;
+            }
+
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "skill-item";
+
+
+            const name =
+                document.createElement("span");
+
+            name.className =
+                "skill-name";
+
+            name.textContent =
+                skill.name ||
+                "Unnamed skill";
+
+
+            const type =
+                document.createElement("span");
+
+            type.className =
+                "skill-type";
+
+            type.textContent =
+                skill.type === "teach"
+                    ? "Teach"
+                    : "Learn";
+
+
+            const deleteButton =
+                document.createElement("button");
+
+            deleteButton.className =
+                "delete-skill";
+
+            deleteButton.textContent =
+                "×";
+
+            deleteButton.title =
+                "Delete skill";
+
+
+            deleteButton.addEventListener(
+                "click",
+                () => deleteSkill(doc.id)
+            );
+
+
+            item.appendChild(name);
+
+            item.appendChild(type);
+
+            item.appendChild(deleteButton);
+
+
+            skillList.appendChild(item);
+
+        });
+
+
+        teachCount.textContent =
+            teaches;
+
+        learnCount.textContent =
+            learns;
+
+
+    } catch (error) {
+
+        console.error(
+            "Error loading skills:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openSkillModal() {
+
+    skillModal.classList.add("show");
+
+    skillName.value = "";
+
+    skillType.value = "teach";
+
+}
+
+
+function closeModal() {
+
+    skillModal.classList.remove("show");
+
+    skillName.value = "";
+
+    skillType.value = "teach";
+
+}
+
+
+addSkillBtn.addEventListener(
+    "click",
+    openSkillModal
+);
+
+
+quickAddSkill.addEventListener(
+    "click",
+    openSkillModal
+);
+
+
+closeSkillModal.addEventListener(
+    "click",
+    closeModal
+);
+
+
+skillModalOverlay.addEventListener(
+    "click",
+    closeModal
+);
+
+
+/* =====================================================
+   ADD SKILL
+===================================================== */
+
+saveSkillBtn.addEventListener(
+    "click",
+    async () => {
+
+        if (!currentUser) {
+
+            alert(
+                "You are not logged in."
+            );
+
+            return;
+
+        }
+
+
+        const name =
+            skillName.value.trim();
+
+        const type =
+            skillType.value;
+
+
+        if (!name) {
+
+            alert(
+                "Please select a skill."
+            );
+
+            return;
+
+        }
+
+
+        saveSkillBtn.disabled =
+            true;
+
+        saveSkillBtn.textContent =
+            "Adding...";
+
+
+        try {
+
+            await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("skills")
+                .add({
+
+                    name:
+                        name,
+
+                    type:
+                        type,
+
+                    createdAt:
+                        firebase.firestore
+                            .FieldValue
+                            .serverTimestamp()
+
+                });
+
+
+            closeModal();
+
+
+            await loadSkills();
+
+            await loadDiscoverUsers();
+
+            await updateSessionCount();
+
+
+        } catch (error) {
+
+            console.error(
+                "Error adding skill:",
+                error
+            );
+
+
+            alert(
+                "Could not add the skill. Please try again."
+            );
+
+
+        } finally {
+
+            saveSkillBtn.disabled =
+                false;
+
+            saveSkillBtn.textContent =
+                "Add Skill";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   DELETE SKILL
+===================================================== */
+
+async function deleteSkill(skillId) {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this skill?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("skills")
+            .doc(skillId)
+            .delete();
+
+
+        await loadSkills();
+
+        await loadDiscoverUsers();
+
+
+    } catch (error) {
+
+        console.error(
+            "Delete error:",
+            error
+        );
+
+
+        alert(
+            "Could not delete the skill."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DISCOVER — NORMALIZE
+===================================================== */
+
+function normalizeSkill(skill) {
+
+    return String(skill || "")
+        .trim()
+        .toLowerCase();
+
+}
+
+
+/* =====================================================
+   DISCOVER — MATCH
+===================================================== */
+
+function calculateMatch(otherSkills) {
+
+    const myTeach =
+        mySkills
+            .filter(
+                skill =>
+                    skill.type === "teach"
+            )
+            .map(
+                skill =>
+                    normalizeSkill(
+                        skill.name
+                    )
+            );
+
+
+    const myLearn =
+        mySkills
+            .filter(
+                skill =>
+                    skill.type === "learn"
+            )
+            .map(
+                skill =>
+                    normalizeSkill(
+                        skill.name
+                    )
+            );
+
+
+    const otherTeach =
+        otherSkills
+            .filter(
+                skill =>
+                    skill.type === "teach"
+            )
+            .map(
+                skill =>
+                    normalizeSkill(
+                        skill.name
+                    )
+            );
+
+
+    const otherLearn =
+        otherSkills
+            .filter(
+                skill =>
+                    skill.type === "learn"
+            )
+            .map(
+                skill =>
+                    normalizeSkill(
+                        skill.name
+                    )
+            );
+
+
+    const teachMatches =
+        myLearn.filter(
+            skill =>
+                otherTeach.includes(skill)
+        );
+
+
+    const learnMatches =
+        myTeach.filter(
+            skill =>
+                otherLearn.includes(skill)
+        );
+
+
+    const allMatches = [
+
+        ...new Set([
+
+            ...teachMatches,
+
+            ...learnMatches
+
+        ])
+
+    ];
+
+
+    let score = 0;
+
+
+    if (allMatches.length > 0) {
+
+        score =
+            Math.min(
+                100,
+                allMatches.length * 50
+            );
+
+    }
+
+
+    return {
+
+        score:
+            score,
+
+        teachMatches:
+            teachMatches,
+
+        learnMatches:
+            learnMatches,
+
+        totalMatches:
+            allMatches.length
+
+    };
+
+}
+
+
+/* =====================================================
+   DISCOVER — LOAD USERS
+   UNCHANGED
+===================================================== */
+
+async function loadDiscoverUsers() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    discoverList.innerHTML = `
+
+        <div class="loading">
+            Finding SkillOrbit members...
+        </div>
+
+    `;
+
+
+    try {
+
+        const usersSnapshot =
+            await db
+                .collection("users")
+                .get();
+
+
+        const users = [];
+
+
+        for (
+            const userDoc
+            of usersSnapshot.docs
+        ) {
+
+            if (
+                userDoc.id ===
+                currentUser.uid
+            ) {
+
+                continue;
+
+            }
+
+
+            const userData =
+                userDoc.data() || {};
+
+
+            let skills = [];
+
+
+            try {
+
+                const skillsSnapshot =
+                    await db
+                        .collection("users")
+                        .doc(userDoc.id)
+                        .collection("skills")
+                        .get();
+
+
+                skills =
+                    skillsSnapshot.docs.map(
+                        skillDoc => {
+
+                            const data =
+                                skillDoc.data() || {};
+
+
+                            return {
+
+                                name:
+                                    data.name || "",
+
+                                type:
+                                    data.type || ""
+
+                            };
+
+                        }
+                    );
+
+
+            } catch (skillError) {
+
+                console.error(
+                    "Could not load skills for:",
+                    userDoc.id,
+                    skillError
+                );
+
+
+                skills = [];
+
+            }
+
+
+            const name =
+                userData.name ||
+                userData.displayName ||
+                (
+                    userData.email
+                        ? userData.email
+                            .split("@")[0]
+                        : "SkillOrbit User"
+                );
+
+
+            const email =
+                userData.email ||
+                "";
+
+
+            const match =
+                calculateMatch(skills);
+
+
+            users.push({
+
+                id:
+                    userDoc.id,
+
+                name:
+                    name,
+
+                email:
+                    email,
+
+                skills:
+                    skills,
+
+                match:
+                    match
+
+            });
+
+        }
+
+
+        users.sort(
+            (a, b) => {
+
+                if (
+                    b.match.score !==
+                    a.match.score
+                ) {
+
+                    return (
+                        b.match.score -
+                        a.match.score
+                    );
+
+                }
+
+
+                return a.name
+                    .toLowerCase()
+                    .localeCompare(
+                        b.name.toLowerCase()
+                    );
+
+            }
+        );
+
+
+        const totalMatches =
+            users.filter(
+                user =>
+                    user.match.totalMatches >
+                    0
+            ).length;
+
+
+        matchCount.textContent =
+            totalMatches;
+
+
+        renderDiscoverUsers(users);
+
+
+    } catch (error) {
+
+        console.error(
+            "DISCOVER FIREBASE ERROR:",
+            error
+        );
+
+
+        discoverList.innerHTML = `
+
+            <div class="discover-empty">
+
+                <strong>
+                    Discover could not load
+                </strong>
+
+                <br>
+
+                Firebase returned an error
+                while loading SkillOrbit members.
+
+                <br><br>
+
+                <span style="font-size:11px;">
+                    ${escapeHtml(
+                        error.message ||
+                        "Unknown Firebase error"
+                    )}
+                </span>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   DISCOVER — RENDER USERS
+   UNCHANGED
+===================================================== */
+
+function renderDiscoverUsers(users) {
+
+    if (users.length === 0) {
+
+        discoverList.innerHTML = `
+
+            <div class="discover-empty">
+
+                <strong>
+                    No other members yet
+                </strong>
+
+                <br>
+
+                Once another person joins SkillOrbit,
+                they will appear here.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    discoverList.innerHTML = "";
+
+
+    users.forEach(user => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "discover-card";
+
+
+        const top =
+            document.createElement("div");
+
+        top.className =
+            "discover-top";
+
+
+        const avatar =
+            document.createElement("div");
+
+        avatar.className =
+            "discover-avatar";
+
+        avatar.textContent =
+            (
+                user.name ||
+                "U"
+            )
+                .charAt(0)
+                .toUpperCase();
+
+
+        const info =
+            document.createElement("div");
+
+
+        const name =
+            document.createElement("div");
+
+        name.className =
+            "discover-name";
+
+        name.textContent =
+            user.name;
+
+
+        const email =
+            document.createElement("div");
+
+        email.className =
+            "discover-email";
+
+        email.textContent =
+            user.email;
+
+
+        info.appendChild(name);
+
+        info.appendChild(email);
+
+
+        const badge =
+            document.createElement("div");
+
+        badge.className =
+            "match-badge";
+
+
+        if (
+            user.match.totalMatches ===
+            0
+        ) {
+
+            badge.classList.add(
+                "no-match"
+            );
+
+            badge.textContent =
+                "No direct match";
+
+        } else {
+
+            badge.textContent =
+                user.match.score +
+                "% Match";
+
+        }
+
+
+        top.appendChild(avatar);
+
+        top.appendChild(info);
+
+        top.appendChild(badge);
+
+
+        const skills =
+            document.createElement("div");
+
+        skills.className =
+            "discover-skills";
+
+
+        if (
+            user.skills.length ===
+            0
+        ) {
+
+            const noSkills =
+                document.createElement("span");
+
+            noSkills.className =
+                "discover-skill";
+
+            noSkills.textContent =
+                "No skills added yet";
+
+
+            skills.appendChild(
+                noSkills
+            );
+
+        } else {
+
+            user.skills.forEach(
+                skill => {
+
+                    const tag =
+                        document.createElement("span");
+
+                    tag.className =
+                        "discover-skill";
+
+
+                    if (
+                        skill.type ===
+                        "teach"
+                    ) {
+
+                        tag.classList.add(
+                            "teach"
+                        );
+
+                        tag.textContent =
+                            skill.name +
+                            " • Teach";
+
+                    } else {
+
+                        tag.classList.add(
+                            "learn"
+                        );
+
+                        tag.textContent =
+                            skill.name +
+                            " • Learn";
+
+                    }
+
+
+                    skills.appendChild(tag);
+
+                }
+            );
+
+        }
+
+
+        const message =
+            document.createElement("div");
+
+        message.className =
+            "match-message";
+
+
+        if (
+            user.match.teachMatches.length >
+            0
+        ) {
+
+            message.innerHTML =
+                "<strong>" +
+                escapeHtml(
+                    user.name
+                ) +
+                "</strong> can teach you: " +
+                user.match.teachMatches
+                    .map(
+                        skill =>
+                            escapeHtml(skill)
+                    )
+                    .join(", ");
+
+
+        } else if (
+            user.match.learnMatches.length >
+            0
+        ) {
+
+            message.innerHTML =
+                "<strong>" +
+                escapeHtml(
+                    user.name
+                ) +
+                "</strong> wants to learn: " +
+                user.match.learnMatches
+                    .map(
+                        skill =>
+                            escapeHtml(skill)
+                    )
+                    .join(", ");
+
+
+        } else {
+
+            message.textContent =
+                "Explore their skills and see if you can connect.";
+
+        }
+
+
+        card.appendChild(top);
+
+        card.appendChild(skills);
+
+        card.appendChild(message);
+
+
+        discoverList.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   MATCHES — LOAD USERS
+===================================================== */
+
+async function loadMatches() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    matchesList.innerHTML = `
+
+        <div class="loading">
+            Finding your matches...
+        </div>
+
+    `;
+
+
+    try {
+
+        const usersSnapshot =
+            await db
+                .collection("users")
+                .get();
+
+
+        const matches = [];
+
+
+        for (
+            const userDoc
+            of usersSnapshot.docs
+        ) {
+
+            if (
+                userDoc.id ===
+                currentUser.uid
+            ) {
+
+                continue;
+
+            }
+
+
+            const userData =
+                userDoc.data() || {};
+
+
+            const skillsSnapshot =
+                await db
+                    .collection("users")
+                    .doc(userDoc.id)
+                    .collection("skills")
+                    .get();
+
+
+            const otherSkills =
+                skillsSnapshot.docs.map(
+                    doc => {
+
+                        const data =
+                            doc.data() || {};
+
+
+                        return {
+
+                            name:
+                                data.name || "",
+
+                            type:
+                                data.type || ""
+
+                        };
+
+                    }
+                );
+
+
+            const match =
+                calculateMatch(otherSkills);
+
+
+            if (
+                match.totalMatches >
+                0
+            ) {
+
+                const name =
+                    userData.name ||
+                    userData.displayName ||
+                    (
+                        userData.email
+                            ? userData.email
+                                .split("@")[0]
+                            : "SkillOrbit User"
+                    );
+
+
+                matches.push({
+
+                    uid:
+                        userDoc.id,
+
+                    name:
+                        name,
+
+                    email:
+                        userData.email || "",
+
+                    match:
+                        match
+
+                });
+
+            }
+
+        }
+
+
+        matches.sort(
+            (a, b) =>
+                b.match.score -
+                a.match.score
+        );
+
+
+        matchCount.textContent =
+            matches.length;
+
+
+        renderMatches(matches);
+
+        await loadIncomingRequests();
+
+
+    } catch (error) {
+
+        console.error(
+            "MATCHES ERROR:",
+            error
+        );
+
+
+        matchesList.innerHTML = `
+
+            <div class="modal-empty">
+
+                Could not load matches.
+
+                <br><br>
+
+                ${escapeHtml(
+                    error.message ||
+                    "Unknown error"
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   MATCHES — RENDER
+===================================================== */
+
+function renderMatches(matches) {
+
+    if (matches.length === 0) {
+
+        matchesList.innerHTML = `
+
+            <div class="modal-empty">
+
+                No direct matches yet.
+
+                <br><br>
+
+                Add more skills to find useful connections.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    matchesList.innerHTML = "";
+
+
+    matches.forEach(match => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "connection-card";
+
+
+        const top =
+            document.createElement("div");
+
+        top.className =
+            "connection-top";
+
+
+        const avatar =
+            document.createElement("div");
+
+        avatar.className =
+            "connection-avatar";
+
+        avatar.textContent =
+            match.name
+                .charAt(0)
+                .toUpperCase();
+
+
+        const info =
+            document.createElement("div");
+
+
+        const name =
+            document.createElement("div");
+
+        name.className =
+            "connection-name";
+
+        name.textContent =
+            match.name;
+
+
+        const email =
+            document.createElement("div");
+
+        email.className =
+            "connection-email";
+
+        email.textContent =
+            match.email;
+
+
+        info.appendChild(name);
+
+        info.appendChild(email);
+
+
+        top.appendChild(avatar);
+
+        top.appendChild(info);
+
+
+        card.appendChild(top);
+
+
+        if (
+            match.match.teachMatches.length >
+            0
+        ) {
+
+            match.match.teachMatches.forEach(
+                skill => {
+
+                    const skillText =
+                        document.createElement("div");
+
+                    skillText.className =
+                        "connection-skill";
+
+                    skillText.textContent =
+                        "Can teach you: " +
+                        skill;
+
+
+                    card.appendChild(
+                        skillText
+                    );
+
+
+                    const button =
+                        document.createElement("button");
+
+                    button.className =
+                        "connection-button primary";
+
+                    button.textContent =
+                        "Request to Learn";
+
+
+                    button.addEventListener(
+                        "click",
+                        () => sendLearningRequest(
+                            match.uid,
+                            match.name,
+                            skill,
+                            button
+                        )
+                    );
+
+
+                    const actions =
+                        document.createElement("div");
+
+                    actions.className =
+                        "connection-actions";
+
+                    actions.appendChild(
+                        button
+                    );
+
+                    card.appendChild(
+                        actions
+                    );
+
+                }
+            );
+
+        }
+
+
+        if (
+            match.match.learnMatches.length >
+            0
+        ) {
+
+            match.match.learnMatches.forEach(
+                skill => {
+
+                    const skillText =
+                        document.createElement("div");
+
+                    skillText.className =
+                        "connection-skill";
+
+                    skillText.textContent =
+                        "Wants to learn: " +
+                        skill;
+
+
+                    card.appendChild(
+                        skillText
+                    );
+
+                }
+            );
+
+        }
+
+
+        matchesList.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   SEND LEARNING REQUEST
+===================================================== */
+
+async function sendLearningRequest(
+    teacherUid,
+    teacherName,
+    skill,
+    button
+) {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    button.disabled =
+        true;
+
+    button.textContent =
+        "Sending...";
+
+
+    try {
+
+        const existing =
+            await db
+                .collection("learningRequests")
+                .where(
+                    "learnerUid",
+                    "==",
+                    currentUser.uid
+                )
+                .get();
+
+
+        let alreadyExists = false;
+
+
+        existing.forEach(doc => {
+
+            const data =
+                doc.data() || {};
+
+
+            if (
+                data.teacherUid ===
+                teacherUid &&
+                data.skillName ===
+                skill &&
+                data.status ===
+                "pending"
+            ) {
+
+                alreadyExists = true;
+
+            }
+
+        });
+
+
+        if (alreadyExists) {
+
+            alert(
+                "You already sent a request for this skill."
+            );
+
+            button.textContent =
+                "Request Sent";
+
+            return;
+
+        }
+
+
+        const learnerName =
+            welcomeName.textContent ||
+            "SkillOrbit User";
+
+
+        await db
+            .collection("learningRequests")
+            .add({
+
+                learnerUid:
+                    currentUser.uid,
+
+                learnerName:
+                    learnerName,
+
+                learnerEmail:
+                    currentUser.email || "",
+
+                teacherUid:
+                    teacherUid,
+
+                teacherName:
+                    teacherName,
+
+                skillName:
+                    skill,
+
+                status:
+                    "pending",
+
+                createdAt:
+                    firebase.firestore
+                        .FieldValue
+                        .serverTimestamp(),
+
+                updatedAt:
+                    firebase.firestore
+                        .FieldValue
+                        .serverTimestamp()
+
+            });
+
+
+        button.textContent =
+            "Request Sent";
+
+
+        alert(
+            "Learning request sent to " +
+            teacherName +
+            "."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "REQUEST ERROR:",
+            error
+        );
+
+
+        alert(
+            "Could not send the request.\n\n" +
+            error.message
+        );
+
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "Request to Learn";
+
+    }
+
+}
+
+
+/* =====================================================
+   INCOMING REQUESTS
+===================================================== */
+
+async function loadIncomingRequests() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    incomingRequestsList.innerHTML = `
+
+        <div class="loading">
+            Checking incoming requests...
+        </div>
+
+    `;
+
+
+    try {
+
+        const snapshot =
+            await db
+                .collection("learningRequests")
+                .where(
+                    "teacherUid",
+                    "==",
+                    currentUser.uid
+                )
+                .get();
+
+
+        const requests =
+            snapshot.docs
+                .map(doc => ({
+
+                    id:
+                        doc.id,
+
+                    ...doc.data()
+
+                }))
+                .filter(
+                    request =>
+                        request.status ===
+                        "pending"
+                );
+
+
+        if (requests.length === 0) {
+
+            incomingRequestsList.innerHTML = `
+
+                <div class="modal-empty">
+
+                    No pending learning requests.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        incomingRequestsList.innerHTML = "";
+
+
+        requests.forEach(request => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "connection-card";
+
+
+            const top =
+                document.createElement("div");
+
+            top.className =
+                "connection-top";
+
+
+            const avatar =
+                document.createElement("div");
+
+            avatar.className =
+                "connection-avatar";
+
+            avatar.textContent =
+                (
+                    request.learnerName ||
+                    "U"
+                )
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            const info =
+                document.createElement("div");
+
+
+            const name =
+                document.createElement("div");
+
+            name.className =
+                "connection-name";
+
+            name.textContent =
+                request.learnerName ||
+                "SkillOrbit User";
+
+
+            const email =
+                document.createElement("div");
+
+            email.className =
+                "connection-email";
+
+            email.textContent =
+                request.learnerEmail ||
+                "";
+
+
+            info.appendChild(name);
+
+            info.appendChild(email);
+
+
+            top.appendChild(avatar);
+
+            top.appendChild(info);
+
+
+            card.appendChild(top);
+
+
+            const skill =
+                document.createElement("div");
+
+            skill.className =
+                "connection-skill";
+
+            skill.textContent =
+                "Wants to learn: " +
+                request.skillName;
+
+
+            card.appendChild(skill);
+
+
+            const status =
+                document.createElement("div");
+
+            status.className =
+                "connection-status";
+
+            status.textContent =
+                "This person matched with your teaching skill.";
+
+
+            card.appendChild(status);
+
+
+            const actions =
+                document.createElement("div");
+
+            actions.className =
+                "connection-actions";
+
+
+            const accept =
+                document.createElement("button");
+
+            accept.className =
+                "connection-button primary";
+
+            accept.textContent =
+                "Accept";
+
+
+            accept.addEventListener(
+                "click",
+                () =>
+                    updateLearningRequest(
+                        request.id,
+                        "accepted"
+                    )
+            );
+
+
+            const reject =
+                document.createElement("button");
+
+            reject.className =
+                "connection-button danger";
+
+            reject.textContent =
+                "Reject";
+
+
+            reject.addEventListener(
+                "click",
+                () =>
+                    updateLearningRequest(
+                        request.id,
+                        "rejected"
+                    )
+            );
+
+
+            actions.appendChild(
+                accept
+            );
+
+            actions.appendChild(
+                reject
+            );
+
+
+            card.appendChild(actions);
+
+
+            incomingRequestsList.appendChild(
+                card
+            );
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "INCOMING REQUEST ERROR:",
+            error
+        );
+
+
+        incomingRequestsList.innerHTML = `
+
+            <div class="modal-empty">
+
+                Could not load requests.
+
+                <br><br>
+
+                ${escapeHtml(
+                    error.message ||
+                    "Unknown error"
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   ACCEPT / REJECT REQUEST
+===================================================== */
+
+async function updateLearningRequest(
+    requestId,
+    newStatus
+) {
+
+    try {
+
+        const requestRef =
+            db
+                .collection("learningRequests")
+                .doc(requestId);
+
+
+        const requestSnapshot =
+            await requestRef.get();
+
+
+        if (!requestSnapshot.exists) {
+
+            alert(
+                "This request no longer exists."
+            );
+
+            return;
+
+        }
+
+
+        const request =
+            requestSnapshot.data();
+
+
+        if (
+            request.teacherUid !==
+            currentUser.uid
+        ) {
+
+            alert(
+                "You cannot modify this request."
+            );
+
+            return;
+
+        }
+
+
+        await requestRef.update({
+
+            status:
+                newStatus,
+
+            updatedAt:
+                firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+        });
+
+
+        if (
+            newStatus ===
+            "accepted"
+        ) {
+
+            await db
+                .collection("sessions")
+                .add({
+
+                    learnerUid:
+                        request.learnerUid,
+
+                    learnerName:
+                        request.learnerName,
+
+                    learnerEmail:
+                        request.learnerEmail,
+
+                    teacherUid:
+                        request.teacherUid,
+
+                    teacherName:
+                        request.teacherName,
+
+                    skillName:
+                        request.skillName,
+
+                    status:
+                        "active",
+
+                    requestId:
+                        requestId,
+
+                    createdAt:
+                        firebase.firestore
+                            .FieldValue
+                            .serverTimestamp()
+
+                });
+
+
+            alert(
+                "Request accepted. A learning session has been created."
+            );
+
+        } else {
+
+            alert(
+                "Learning request rejected."
+            );
+
+        }
+
+
+        await loadIncomingRequests();
+
+        await updateSessionCount();
+
+
+    } catch (error) {
+
+        console.error(
+            "UPDATE REQUEST ERROR:",
+            error
+        );
+
+
+        alert(
+            "Could not update the request.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SESSIONS
+===================================================== */
+
+async function loadSessions() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    sessionsList.innerHTML = `
+
+        <div class="loading">
+            Loading your sessions...
+        </div>
+
+    `;
+
+
+    try {
+
+        const teacherSnapshot =
+            await db
+                .collection("sessions")
+                .where(
+                    "teacherUid",
+                    "==",
+                    currentUser.uid
+                )
+                .get();
+
+
+        const learnerSnapshot =
+            await db
+                .collection("sessions")
+                .where(
+                    "learnerUid",
+                    "==",
+                    currentUser.uid
+                )
+                .get();
+
+
+        const sessionsMap =
+            new Map();
+
+
+        teacherSnapshot.forEach(doc => {
+
+            sessionsMap.set(
+                doc.id,
+                {
+                    id:
+                        doc.id,
+
+                    ...doc.data()
+                }
+            );
+
+        });
+
+
+        learnerSnapshot.forEach(doc => {
+
+            sessionsMap.set(
+                doc.id,
+                {
+                    id:
+                        doc.id,
+
+                    ...doc.data()
+                }
+            );
+
+        });
+
+
+        const sessions =
+            Array.from(
+                sessionsMap.values()
+            );
+
+
+        if (sessions.length === 0) {
+
+            sessionsList.innerHTML = `
+
+                <div class="modal-empty">
+
+                    No active sessions yet.
+
+                    <br><br>
+
+                    Accept a learning request to create
+                    your first session.
+
+                </div>
+
+            `;
+
+            sessionCount.textContent =
+                "0";
+
+            return;
+
+        }
+
+
+        sessionCount.textContent =
+            sessions.length;
+
+
+        sessionsList.innerHTML = "";
+
+
+        sessions.forEach(session => {
+
+            const isTeacher =
+                session.teacherUid ===
+                currentUser.uid;
+
+
+            const otherName =
+                isTeacher
+                    ? session.learnerName
+                    : session.teacherName;
+
+
+            const otherEmail =
+                isTeacher
+                    ? session.learnerEmail
+                    : session.teacherEmail;
+
+
+            const roleText =
+                isTeacher
+                    ? "You are teaching"
+                    : "You are learning";
+
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "connection-card";
+
+
+            const top =
+                document.createElement("div");
+
+            top.className =
+                "connection-top";
+
+
+            const avatar =
+                document.createElement("div");
+
+            avatar.className =
+                "connection-avatar";
+
+            avatar.textContent =
+                (
+                    otherName ||
+                    "U"
+                )
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            const info =
+                document.createElement("div");
+
+
+            const name =
+                document.createElement("div");
+
+            name.className =
+                "connection-name";
+
+            name.textContent =
+                otherName ||
+                "SkillOrbit User";
+
+
+            const email =
+                document.createElement("div");
+
+            email.className =
+                "connection-email";
+
+            email.textContent =
+                otherEmail ||
+                "";
+
+
+            info.appendChild(name);
+
+            info.appendChild(email);
+
+
+            top.appendChild(avatar);
+
+            top.appendChild(info);
+
+
+            card.appendChild(top);
+
+
+            const skill =
+                document.createElement("div");
+
+            skill.className =
+                "connection-skill";
+
+            skill.textContent =
+                session.skillName;
+
+
+            card.appendChild(skill);
+
+
+            const status =
+                document.createElement("div");
+
+            status.className =
+                "connection-status";
+
+            status.textContent =
+                roleText +
+                " • Session active";
+
+
+            card.appendChild(status);
+
+
+            sessionsList.appendChild(card);
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "SESSIONS ERROR:",
+            error
+        );
+
+
+        sessionsList.innerHTML = `
+
+            <div class="modal-empty">
+
+                Could not load sessions.
+
+                <br><br>
+
+                ${escapeHtml(
+                    error.message ||
+                    "Unknown error"
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   SESSION COUNT
+===================================================== */
+
+async function updateSessionCount() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    try {
+
+        const teacherSnapshot =
+            await db
+                .collection("sessions")
+                .where(
+                    "teacherUid",
+                    "==",
+                    currentUser.uid
+                )
+                .get();
+
+
+        const learnerSnapshot =
+            await db
+                .collection("sessions")
+                .where(
+                    "learnerUid",
+                    "==",
+                    currentUser.uid
+                )
+                .get();
+
+
+        const ids =
+            new Set();
+
+
+        teacherSnapshot.forEach(
+            doc =>
+                ids.add(doc.id)
+        );
+
+
+        learnerSnapshot.forEach(
+            doc =>
+                ids.add(doc.id)
+        );
+
+
+        sessionCount.textContent =
+            ids.size;
+
+
+    } catch (error) {
+
+        console.error(
+            "SESSION COUNT ERROR:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   MATCHES MODAL
+===================================================== */
+
+async function openMatchesModal() {
+
+    matchesModal.classList.add(
+        "show"
+    );
+
+
+    await loadMatches();
+
+}
+
+
+function closeMatches() {
+
+    matchesModal.classList.remove(
+        "show"
+    );
+
+}
+
+
+closeMatchesModal.addEventListener(
+    "click",
+    closeMatches
+);
+
+
+matchesModalOverlay.addEventListener(
+    "click",
+    closeMatches
+);
+
+
+/* =====================================================
+   SESSIONS MODAL
+===================================================== */
+
+async function openSessionsModal() {
+
+    sessionsModal.classList.add(
+        "show"
+    );
+
+
+    await loadSessions();
+
+}
+
+
+function closeSessions() {
+
+    sessionsModal.classList.remove(
+        "show"
+    );
+
+}
+
+
+closeSessionsModal.addEventListener(
+    "click",
+    closeSessions
+);
+
+
+sessionsModalOverlay.addEventListener(
+    "click",
+    closeSessions
+);
+
+
+/* =====================================================
+   NAVIGATION HELPER
+===================================================== */
+
+function setActiveNav(activeButton) {
+
+    document
+        .querySelectorAll(".nav-button")
+        .forEach(button => {
+
+            button.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if (activeButton) {
+
+        activeButton.classList.add(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DASHBOARD NAVIGATION
+===================================================== */
+
+dashboardNav.addEventListener(
+    "click",
+    () => {
+
+        setActiveNav(
+            dashboardNav
+        );
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+);
+
+
+/* =====================================================
+   MY SKILLS NAVIGATION
+===================================================== */
+
+skillsNav.addEventListener(
+    "click",
+    () => {
+
+        setActiveNav(
+            skillsNav
+        );
+
+
+        skillsSection.scrollIntoView({
+
+            behavior:
+                "smooth",
+
+            block:
+                "start"
+
+        });
+
+    }
+);
+
+
+/* =====================================================
+   DISCOVER BUTTON
+   EXISTING FUNCTIONALITY
+===================================================== */
+
+discoverNav.addEventListener(
+    "click",
+    async () => {
+
+        discoverSection.scrollIntoView({
+
+            behavior:
+                "smooth",
+
+            block:
+                "start"
+
+        });
+
+
+        setActiveNav(
+            discoverNav
+        );
+
+
+        await loadDiscoverUsers();
+
+    }
+);
+
+
+/* =====================================================
+   MATCHES NAVIGATION
+===================================================== */
+
+matchesNav.addEventListener(
+    "click",
+    async () => {
+
+        setActiveNav(
+            matchesNav
+        );
+
+
+        await openMatchesModal();
+
+    }
+);
+
+
+/* =====================================================
+   SESSIONS NAVIGATION
+===================================================== */
+
+sessionsNav.addEventListener(
+    "click",
+    async () => {
+
+        setActiveNav(
+            sessionsNav
+        );
+
+
+        await openSessionsModal();
+
+    }
+);
+
+
+/* =====================================================
+   QUICK DISCOVER
+===================================================== */
+
+quickDiscover.addEventListener(
+    "click",
+    async () => {
+
+        setActiveNav(
+            discoverNav
+        );
+
+
+        discoverSection.scrollIntoView({
+
+            behavior:
+                "smooth",
+
+            block:
+                "start"
+
+        });
+
+
+        await loadDiscoverUsers();
+
+    }
+);
+
+
+/* =====================================================
+   QUICK MATCHES
+===================================================== */
+
+quickMatches.addEventListener(
+    "click",
+    async () => {
+
+        setActiveNav(
+            matchesNav
+        );
+
+
+        await openMatchesModal();
+
+    }
+);
+
+
+/* =====================================================
+   PROFILE BUTTON
+===================================================== */
+
+profileButton.addEventListener(
+    "click",
+    () => {
+
+        if (!currentUser) {
+
+            return;
+
+        }
+
+
+        const name =
+            welcomeName.textContent ||
+            "User";
+
+        const email =
+            currentUser.email ||
+            "No email available";
+
+
+        alert(
+            "SkillOrbit Profile\n\n" +
+            "Name: " +
+            name +
+            "\n" +
+            "Email: " +
+            email
+        );
+
+    }
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+logoutBtn.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            await auth.signOut();
+
+
+            window.location.href =
+                "index.html";
+
+
+        } catch (error) {
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+
+            alert(
+                "Could not log out. Please try again."
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CLOSE MODALS WITH ESCAPE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeModal();
+
+            closeMatches();
+
+            closeSessions();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
