@@ -373,10 +373,7 @@ SkillOrbit follows:
 
 </div>
 
-```text
-                  
-                   
-```
+
 
 ---
 
