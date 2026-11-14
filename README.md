@@ -1,19 +1,18 @@
 <div align="center">
 
-# 🌈 **SkillOrbit**
+#  **SkillOrbit**
 
 ### 💫 *Skills in Motion*
 
 ### **Learn • Share • Connect • Grow**
 
-<p>
 A colourful peer-to-peer skill exchange platform where<br>
 <strong>everyone can teach something, everyone can learn something.</strong>
-</p>
 
 <br>
 
 [![GitHub](https://img.shields.io/badge/GitHub-SkillOrbit-181717?style=for-the-badge&logo=github)](https://github.com/oishipaul45-engineer/SkillOrbit)
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-SkillOrbit-00C853?style=for-the-badge)](https://oishipaul45-engineer.github.io/SkillOrbit/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Firebase](https://img.shields.io/badge/Firebase-Powered-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Firestore](https://img.shields.io/badge/Cloud-Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/docs/firestore)
@@ -22,12 +21,12 @@ A colourful peer-to-peer skill exchange platform where<br>
 
 ## 🧭 Explore SkillOrbit
 
-**[🌐 Live Demo](#-live-demo)** &nbsp; • &nbsp;
+**[🌐 Live Demo](https://oishipaul45-engineer.github.io/SkillOrbit/)** &nbsp; • &nbsp;
 **[✨ Features](#-features)** &nbsp; • &nbsp;
 **[📸 Preview](#-preview)** &nbsp; • &nbsp;
 **[🛠️ Tech Stack](#️-tech-stack)** &nbsp; • &nbsp;
 **[⚙️ Setup](#️-getting-started)** &nbsp; • &nbsp;
-**[🗺️ Roadmap](#️- roadmap)**
+**[🗺️ Roadmap](#-roadmap)**
 
 </div>
 
@@ -62,19 +61,19 @@ It transforms individual skills into **connections**, connections into **learnin
                        🔎 DISCOVER
                               │
                               ▼
-                        🎯 MATCH
+                         🎯 MATCH
                               │
                               ▼
-                       💌 REQUEST
+                        💌 REQUEST
                               │
                               ▼
-                        🤝 CONNECT
+                         🤝 CONNECT
                               │
                               ▼
-                         🚀 LEARN
+                          🚀 LEARN
                               │
                               ▼
-                          🌱 GROW
+                           🌱 GROW
 ```
 
 ### ✨ **Everyone has a skill. Everyone has something to learn.**
@@ -205,7 +204,7 @@ Create your personal SkillOrbit profile.
 
 ### 🔵 **02 — DEFINE**
 
-Tell the platform:
+Tell SkillOrbit:
 
 > 🟢 What can I teach?
 
@@ -245,9 +244,7 @@ Build knowledge, connections and confidence.
 
 # 🪐 The SkillOrbit Universe
 
-This is what makes SkillOrbit different.
-
-Instead of thinking about skills as isolated items, SkillOrbit treats them like **points in a constantly expanding network**.
+SkillOrbit treats skills as **points in a constantly expanding network**.
 
 ```text
                          🧑‍💻
@@ -349,17 +346,29 @@ SkillOrbit follows:
 <div align="center">
 
 ### 🟣 SHARE
-↓  
+
+↓
+
 ### 🔵 DISCOVER
-↓  
+
+↓
+
 ### 🟢 MATCH
-↓  
+
+↓
+
 ### 🟡 CONNECT
-↓  
+
+↓
+
 ### 🟠 LEARN
-↓  
+
+↓
+
 ### 🔴 GROW
-↓  
+
+↓
+
 ### 🟣 SHARE AGAIN
 
 </div>
@@ -702,9 +711,9 @@ Imagine:
              ↓
         👨 PERSON B
              │
-         learns
+          learns
              ↓
-        💡 New Skill
+        💡 NEW SKILL
              │
              ↓
         👨 PERSON B
@@ -724,8 +733,6 @@ And millions of connections can create a powerful learning ecosystem.
 
 # 🌟 What This Project Demonstrates
 
-SkillOrbit brings together:
-
 | Area | Implementation |
 |:---|:---|
 | 🌐 Frontend | HTML • CSS • JavaScript |
@@ -738,6 +745,24 @@ SkillOrbit brings together:
 | 🤝 Sessions | Learning connections |
 | 🎨 UI/UX | Responsive product interface |
 | 🔀 Version Control | Git & GitHub |
+
+---
+
+# 🚀 Live Demo
+
+<div align="center">
+
+### **Experience SkillOrbit**
+
+<br>
+
+[![🚀 OPEN LIVE DEMO](https://img.shields.io/badge/🚀_OPEN_LIVE_DEMO-SKILLORBIT-00C853?style=for-the-badge&labelColor=111111)](https://oishipaul45-engineer.github.io/SkillOrbit/)
+
+<br><br>
+
+**https://oishipaul45-engineer.github.io/SkillOrbit/**
+
+</div>
 
 ---
 
